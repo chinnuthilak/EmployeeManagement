@@ -1,0 +1,118 @@
+﻿@model IEnumerable<EmployeeManagement.Models.Employee>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Add Employee", "Create")
+
+
+
+    </p>
+    @if (Model != null)
+    {
+        <p>
+            Average Age of Employees : @ViewBag.AverageAge
+        </p>
+        <p>
+            Average Salary of Employees : @ViewBag.AverageSalary
+        </p>
+        <div style="display:inline-block">
+            Employee Age above average age <div style="background:red; width:20px; height:20px;display:inline-block" ></div>
+        </div>
+        <br/>
+        <div style="display:inline-block">
+            Employee Age below average age <div style="background:green; width:20px; height:20px;display:inline-block"></div>
+        </div>
+        <br />
+        <div style="display:inline-block">
+            Employee salary above average salary <div style="background:red; width:20px; height:20px;display:inline-block"></div>
+        </div>
+        <br />
+        <div style="display:inline-block">
+            Employee salary below average salary <div style="background:green; width:20px; height:20px;display:inline-block"></div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee_salary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee_age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.profile_image)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee_name)
+                    </td>
+                    @if (Convert.ToDouble(item.employee_salary) > Convert.ToDouble(ViewBag.AverageSalary))
+                    {
+                        <td style="background: red">
+                            @Html.DisplayFor(modelItem => item.employee_salary)
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="background: green">
+                            @Html.DisplayFor(modelItem => item.employee_salary)
+                        </td>
+                    }
+                    @if (Convert.ToDouble(item.employee_age) > Convert.ToDouble(ViewBag.AverageAge))
+                    {
+                        <td style="background: red">
+                            @Html.DisplayFor(modelItem => item.employee_age)
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="background: green">
+                            @Html.DisplayFor(modelItem => item.employee_age)
+                        </td>
+                    }
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.profile_image)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+
+
+            }
+
+
+
+
+        </table>
+    }
+    else
+    {
+        <p>
+            No Employees
+        </p>
+    }
+
+</body>
+</html>

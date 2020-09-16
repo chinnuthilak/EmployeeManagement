@@ -1,0 +1,97 @@
+﻿@model EmployeeManagement.Models.Employee
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Employee Details</title>
+</head>
+<body>
+    <div>
+        @if (Model != null)
+        {
+
+
+            <p>
+                Average Age of Employees : @ViewBag.AverageAge
+            </p>
+            <p>
+                Average Salary of Employees : @ViewBag.AverageSalary
+            </p>
+
+            <h4>Employee</h4>
+            <hr />
+
+
+            if (Convert.ToDouble(Model.employee_age) > Convert.ToDouble(ViewBag.AverageAge))
+            {
+                <p>
+                    Employees age is above average age
+                </p>
+            }
+            else
+            {
+                <p>
+                    Employees age is below average age
+                </p>
+            }
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.id)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.id)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.employee_name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.employee_name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.employee_salary)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.employee_salary)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.employee_age)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.employee_age)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.profile_image)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.profile_image)
+                </dd>
+            </dl>
+
+        }
+        else
+        {
+            @ViewBag.Message
+        }
+
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
